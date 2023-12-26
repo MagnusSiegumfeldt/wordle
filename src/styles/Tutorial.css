@@ -1,0 +1,59 @@
+.tutorial-example-container {
+    border-top: 1px solid #8d8d8d;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.tutorial-example-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px 0px;
+    
+}
+.tutorial-example-charbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 3px;
+    border-radius: 4px;
+    background-color: var(--charbox-background-color);
+    border: 2px solid var(--charbox-border-color);
+    color: var(--charbox-font-color);
+}
+
+.tutorial-example-charbox-correct {
+    color: var(--charbox-flipped-font-color);
+    background-color: var(--correct-charbox-color);
+    border: 2px solid var(--correct-charbox-color);
+}
+.tutorial-example-charbox-semicorrect {
+    color: var(--charbox-flipped-font-color);
+    background-color: var(--semicorrect-charbox-color);
+    border: 2px solid var(--semicorrect-charbox-color);
+}
+.tutorial-example-charbox-wrong {
+    color: var(--charbox-flipped-font-color);
+    background-color: var(--wrong-charbox-color);
+    border: 2px solid var(--wrong-charbox-color);
+}
+.tutorial-example-description {
+    font-weight: normal;
+    font-size: 12px;
+}
+.tutorial-dont-show-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.tutorial-dont-show {
+    text-align: center;
+    text-decoration: underline;
+    font-size: 12px;
+    color: #747474;
+    font-weight: normal;
+    cursor: pointer;
+}
+

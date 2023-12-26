@@ -1,0 +1,78 @@
+
+.gameover-header {
+    margin:0px;
+    line-height: 30px;
+    white-space: pre-wrap;
+}
+.gameover-restart-button {
+    font: bold 16px Montserrat, sans-serif;
+    border:none;
+    border-radius: 8px;
+    background-color: var(--theme-color);
+    color:white;
+    padding: 15px 50px;
+    margin-top: 20px;
+    transition: background-color 0.1s;
+}
+.gameover-restart-button:hover {
+    color:white;
+    cursor: pointer;
+    background-color:var(--theme-hover-color);
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.bar-container {
+    display: flex;
+    align-items: center;
+}
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin: 2px 20px 2px 0px;
+    padding: 0px 3px;
+    height: 15px;
+    background-color: #a0a0a0;
+    color: #fff;
+    font-size:12px;
+}
+.bar-guess {
+    background-color: var(--theme-color);
+}
+.bar-label {
+    margin: 0px;
+}
+.bar-label-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 20px;
+}
+.bar-label-container p {
+    font-size: 12px;
+}
+.chart-header {
+    margin: 5px 0px;
+    text-align: left;
+    font-size: 18px;
+}
+
+.winrate-container {
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.statistic-description {
+    font-size: 10px;
+    color: var(--statistic-font-color);
+}
+.statistic-label {
+    font-size: 18px;
+    margin-bottom: 3px;
+}

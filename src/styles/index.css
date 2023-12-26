@@ -1,0 +1,89 @@
+body.dark {
+  font: bold 20px Montserrat, sans-serif;
+
+  --font-color: #fff;
+  --background-color: #1f1f1f;
+  --header-background-color: #3f3f3f;
+  --header-font-color: var(--font-color);
+  --header-font-hover-color: #e9e9e9;
+  --charbox-background-color: #121213;
+  --charbox-border-color: #3a3a3c;
+  --charbox-font-color: var(--font-color);
+  --charbox-flipped-font-color: var(--font-color);
+  --charbox-active-color: #888888;
+
+  --keyboard-button-color: #808386;
+  --keyboard-button-hover-color: #737475;
+  --keyboard-font-color: var(--font-color);
+  --keyboard-flipped-font-color: var(--font-color);
+
+  --theme-color: #61ad62; 
+  --theme-hover-color: #539c55;
+  --grey-color: #414141;
+
+  --correct-charbox-color: var(--theme-color);
+  --correct-charbox-hover-color: var(--theme-hover-color);
+  --semicorrect-charbox-color:#edc953;
+  --semicorrect-charbox-hover-color:#d4b550;
+
+  --wrong-charbox-color: var(--grey-color);
+  --wrong-charbox-hover-color: #3a3a3a;
+
+  --popup-background-color: #242424ee;
+  --popup-font-color: var(--font-color);
+
+  --statistic-font-color: #a3a3a3;
+
+  
+}
+body.light {
+  font: bold 20px Montserrat, sans-serif;
+  --font-color: #444141;
+
+  --background-color: #fff;
+  --header-background-color: #505050;
+  --header-font-color: var(--font-color);
+  --header-font-hover-color: #3a3838;
+  --charbox-background-color: #ffffff;
+  --charbox-border-color: #c9c9c9;
+  --charbox-font-color: var(--font-color);
+  --charbox-flipped-font-color: #fff;
+  --charbox-active-color: #6e6e6e;
+
+  --keyboard-button-color: #cecece;
+  --keyboard-button-hover-color: #c4c4c4;
+  --keyboard-font-color:#686767;
+  --keyboard-flipped-font-color: #fff;
+
+  --theme-color: #61ad62; 
+  --theme-hover-color: #539c55;
+  --grey-color: #414141;
+
+  --correct-charbox-color: var(--theme-color);
+  --correct-charbox-hover-color: var(--theme-hover-color);
+  --semicorrect-charbox-color:#edc953;
+  --semicorrect-charbox-hover-color:#e4c357;
+  
+  --wrong-charbox-color: #707070;
+  --wrong-charbox-hover-color: #646464;
+
+  --popup-background-color: #f7f7f7ee;
+  --popup-font-color: #3a3a3a;
+
+  --statistic-font-color: #a3a3a3;
+
+  
+}
+
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+

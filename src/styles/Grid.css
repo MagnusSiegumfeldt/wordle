@@ -1,0 +1,157 @@
+.guess-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.shake {
+    animation: row-shake 0.3s;
+}
+
+@keyframes row-shake {
+    0% {
+        margin-left: 0rem;
+    }
+
+    20% {
+        margin-left: 0.4rem;
+    }
+
+    40% {
+        margin-left: -0.4rem;
+    }
+
+    60% {
+        margin-left: 0.4rem;
+    }
+    80% {
+        margin-left: -0.4rem;
+    }
+    100% {
+        margin-left: 0rem;
+    }
+}
+
+.charbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 50px;
+    width: 50px;
+    margin: 6px;
+
+    perspective: 500;
+    transition: transform 0.9s;
+    -webkit-transition: -webkit-transform 0.9s;
+    transform-style: preserve-3d;
+
+    outline: none;
+}
+
+.charbox {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    caret-color: transparent;
+
+    border-radius: 4px;
+}
+
+.charbox-front {
+    background-color: var(--charbox-background-color);
+    border: 2px solid var(--charbox-border-color);
+    color: var(--charbox-font-color);
+    opacity: 1;
+}
+
+.charbox-active {
+    border: 2px solid var(--charbox-active-color);
+}
+
+.charbox-back {
+    color: white;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
+
+.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.is-flipped .charbox-front {
+    opacity: 0;
+    transition-delay: 0.5s;
+    transition: opacity 0.9s, color 0.9s, background-color 0.9s, border 0.9s;
+    background-color: transparent;
+    color: transparent;
+}
+
+.charbox-correct {
+    color: white;
+    background-color: var(--correct-charbox-color);
+    border: 2px solid var(--correct-charbox-color) !important;
+}
+
+.charbox-correct:hover {
+    color: white;
+    background-color: var(--correct-charbox-hover-color);
+    border: 2px solid var(--correct-charbox-hover-color);
+}
+
+.charbox-semicorrect {
+    color: white;
+    background-color: var(--semicorrect-charbox-color);
+    border: 2px solid var(--semicorrect-charbox-color) !important;
+}
+
+.charbox-semicorrect:hover {
+    color: white;
+    background-color: var(--semicorrect-charbox-hover-color);
+    border: 2px solid var(--semicorrect-charbox-hover-color);
+}
+
+.charbox-wrong {
+    color: white;
+    background-color: var(--wrong-charbox-color);
+    border: 2px solid var(--wrong-charbox-color);
+}
+
+.charbox-wrong:hover {
+    color: white;
+    background-color: var(--wrong-charbox-hover-color);
+    border: 2px solid var(--wrong-charbox-hover-color);
+}
+
+@media only screen and (max-width: 767px) {
+    .charbox-container {
+        height: 40px;
+        width: 40px;
+        margin: 4px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .charbox-container {
+        height: 45px;
+        width: 45px;
+        margin: 5px;
+    }
+
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .charbox-container {
+        height: 45px;
+        width: 45px;
+        margin: 5px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {}

@@ -1,0 +1,125 @@
+.keyboard-container {
+    width: 95%;
+    max-width: 800px;
+    margin: 50px 0px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.keyboard-button-container {
+    position: relative;
+    width: fill;
+    height: 45px;
+    margin: 3px;
+    
+    text-align: center;
+
+}
+
+.keyboard-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    
+    color: var(--keyboard-font-color);
+    font-size: 16px;
+    font-weight: bold;
+    
+    border-radius: 3px;
+    border: none;
+
+    cursor: pointer;
+}
+.keyboard-button-control {
+    min-width: 18%;
+    color:var(--keyboard-font-color);
+    background-color: var(--keyboard-button-color);
+}
+.keyboard-button-control:hover {
+    min-width: 18%;
+    color:var(--keyboard-font-color);
+    background-color:  var(--keyboard-button-hover-color);
+}
+.keyboard-notevaluated {
+    color: var(--keyboard-font-color);
+    background-color: var(--keyboard-button-color);
+}
+.keyboard-notevaluated:hover {
+    color: var(--keyboard-font-color);
+    background-color: var(--keyboard-button-hover-color);
+}
+.keyboard-correct {
+    color: var(--keyboard-flipped-font-color);
+    background-color: var(--correct-charbox-color);
+}
+.keyboard-correct:hover {
+    color: var(--keyboard-flipped-font-color);
+    background-color: var(--correct-charbox-hover-color);
+}
+.keyboard-semicorrect {
+    color: var(--keyboard-flipped-font-color);
+    background-color: var(--semicorrect-charbox-color);
+}
+.keyboard-semicorrect:hover {
+    color: var(--keyboard-flipped-font-color);
+    background-color: var(--semicorrect-charbox-hover-color);
+}
+.keyboard-wrong {
+    color: var(--keyboard-flipped-font-color);
+    background-color: var(--wrong-charbox-color);
+}
+.keyboard-wrong:hover {
+    color: var(--keyboard-flipped-font-color);
+    background-color: var(--wrong-charbox-hover-color);
+}
+
+@media only screen and (max-width: 767px) {
+    .keyboard-button-container {
+        height: 40px;
+    }
+    .keyboard-button {
+        font-size: 12px;
+        padding: 0px 1px;
+    }
+}
+  
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .keyboard-button-container {
+        height: 45px;
+    }
+    .keyboard-button {
+        font-size: 14px;
+    }
+    .keyboard-container {
+        margin: 30px 0px;
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .keyboard-button-container {
+        height: 50px;
+    }
+    .keyboard-button {
+        font-size: 14px;
+    }
+    .keyboard-container {
+        margin: 30px 0px;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .keyboard-button-container {
+        height: 55px;
+    }
+    .keyboard-button {
+        font-size: 16px;
+    }
+}
