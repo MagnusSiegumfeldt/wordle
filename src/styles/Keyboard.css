@@ -15,7 +15,9 @@
 
 .keyboard-button-container {
     position: relative;
-    width: fill;
+    width: stretch;
+    /*width: -moz-available;          
+    width: -webkit-fill-available;*/
     height: 45px;
     margin: 3px;
     
