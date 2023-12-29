@@ -4,13 +4,7 @@ import { HelpOutline, Leaderboard, Settings, LocalFireDepartment } from '@mui/ic
 import { Language } from '../logic/Enums'
 
 class Header extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        
         return (
             <div className='app-header'>
                 <div className='header-container'>
@@ -22,8 +16,8 @@ class Header extends Component {
                         <div className='non-clickable-icon'>
                             <div className="language-icon">
                                 {
-                                    this.props.language == Language.Danish ? "DK" : 
-                                    this.props.language == Language.English ? "EN" : 
+                                    this.props.language === Language.Danish ? "DK" : 
+                                    this.props.language === Language.English ? "EN" : 
                                     "Err."
                                 }
                             </div>

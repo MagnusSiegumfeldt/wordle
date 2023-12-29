@@ -23,7 +23,7 @@ class CharBox extends Component {
     render() {
         const index = this.props.index;
         return (
-            <div tabIndex={0} style={{ transitionDelay: `${index * this.delay}ms` }} onKeyDown={this.props.handleKeyDown} className={"charbox-container " + (this.props.charState != CharState.NotEvaluated ? "is-flipped" : "")}>  
+            <div tabIndex={0} style={{ transitionDelay: `${index * this.delay}ms` }} onKeyDown={this.props.handleKeyDown} className={"charbox-container " + (this.props.charState !== CharState.NotEvaluated ? "is-flipped" : "")}>  
                 <div className={"charbox charbox-front" + (this.props.active ? " charbox-active" : "")} onClick={() => this.props.handleClickDelete(index)}>
                         {this.props.content}
                 </div>
@@ -36,15 +36,10 @@ class CharBox extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.focus !== this.props.focus) {
-            if (this.props.focus == this.props.index) {
+            if (this.props.focus === this.props.index) {
                 this.props.reference.current.focus()
             }
         }
-      
-
-    }
-    componentDidMount(){
-        
     }
 }
 

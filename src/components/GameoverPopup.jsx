@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { GameState } from '../logic/Enums'
 
 class GameoverPopup extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const game = this.props.game;
         const { score, games, wins, currentStreak, bestStreak } = this.props.stats;
@@ -14,7 +9,7 @@ class GameoverPopup extends Component {
         const widths = score.map(x => (x * 1.0 / total))
         return (
             <div onClick={e => e.stopPropagation()} className="popup-container">
-                {game.getGameState() == GameState.Won ? (
+                {game.getGameState() === GameState.Won ? (
                     <p className="gameover-header">You guessed{"\n" + game.getWord() + "\n"}in { game.getGuessNum() + 1 } attempts</p>
                 ) : (
                     <p className="gameover-header">You did not guess{"\n" + game.getWord() + "\n"}in { game.getGuessNum() } attempts</p>
@@ -44,7 +39,7 @@ class GameoverPopup extends Component {
                         widths.map((x, i) => (
                             <div key={i} className="bar-container">
                                 <div className="bar-label-container"><p className="bar-label">{ i + 1 }</p></div>
-                                <div style={{width: "calc(" + x * 81 + "% + 10px)" }} className={"bar" + (game.getGuessNum() == i ? " bar-guess" : "")}>{ score[i] }</div>
+                                <div style={{width: "calc(" + x * 81 + "% + 10px)" }} className={"bar" + (game.getGuessNum() === i ? " bar-guess" : "")}>{ score[i] }</div>
                             </div>
                         ))     
                     }
@@ -54,11 +49,6 @@ class GameoverPopup extends Component {
             </div>
             
         )
-    }
-
-    
-    componentDidMount(){
-        
     }
 }
 

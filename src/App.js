@@ -106,7 +106,7 @@ class App extends Component {
 	toggleHardmode = () => {
 		
 		const error = this.state.game.toggleHardmode();
-		if (error != ErrorType.None) {
+		if (error !== ErrorType.None) {
 			this.createNotification(error);
 			return;
 		} 
@@ -125,13 +125,13 @@ class App extends Component {
 	}
 	
 	makeGuess = (guess) => {
-		let { game, stats, notifications } = this.state;
+		let { game, stats } = this.state;
 		const error = game.makeGuess(guess);
-		if (error != ErrorType.None) {
+		if (error !== ErrorType.None) {
 			this.createNotification(error);
 			return error;
 		}
-		if (game.getGameState() == GameState.Won) {
+		if (game.getGameState() === GameState.Won) {
 			stats.score[game.getGuessNum()] += 1;
 			stats.games += 1;
 			stats.wins += 1;
@@ -146,7 +146,7 @@ class App extends Component {
 			}, 600);
 			CookieHelper.setStats(stats);
 			
-		} else if (game.getGameState() == GameState.Lost) {
+		} else if (game.getGameState() === GameState.Lost) {
 			stats.games += 1;
 			stats.currentStreak = 0;
 			setTimeout(() => {
@@ -176,9 +176,9 @@ class App extends Component {
 	togglePopup = (event, popup) => {
 		event.stopPropagation()
 		this.setState({
-			tutorialPopup:   (popup == "tutorial"     && !this.state.tutorialPopup  ),
-			settingsPopup:   (popup == "settings"     && !this.state.settingsPopup  ),
-			statisticsPopup: (popup == "statistics"   && !this.state.statisticsPopup),
+			tutorialPopup:   (popup === "tutorial"     && !this.state.tutorialPopup  ),
+			settingsPopup:   (popup === "settings"     && !this.state.settingsPopup  ),
+			statisticsPopup: (popup === "statistics"   && !this.state.statisticsPopup),
 		});
 		this.gameRef.current.focus();
 	}
@@ -227,14 +227,14 @@ class App extends Component {
         input = input.toUpperCase();
         let { currentGuess } = this.state;
         let { game, stats } = this.state;
-        if (input == "BACKSPACE") {
+        if (input === "BACKSPACE") {
             if (currentGuess.length > 0) {
                 currentGuess.pop();
             }
-        } else if (input == "ENTER") {
-            if (currentGuess.length == 5) {
+        } else if (input === "ENTER") {
+            if (currentGuess.length === 5) {
 				const error = this.makeGuess(currentGuess.join(""));
-                if (error == ErrorType.None) {
+                if (error === ErrorType.None) {
                     currentGuess = [];
                 } else {
                     this.shakeRow(game.getGuessNum());
@@ -249,7 +249,7 @@ class App extends Component {
                     this.createNotification(ErrorType.Length);
                 }
             }
-        } else if (input == " ") {
+        } else if (input === " ") {
             if (game.isGameover()) {
                 this.handleRestart();
                 return;
@@ -281,7 +281,7 @@ class App extends Component {
 
 	setLanguage = (language) => {
 		const error = this.state.game.setLanguage(language)
-		if (error != ErrorType.None) {
+		if (error !== ErrorType.None) {
 			this.createNotification(error);
 			return;
 		} 

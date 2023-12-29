@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Close } from '@mui/icons-material';
-import { Checkbox, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Checkbox, Select, MenuItem, FormControl } from '@mui/material';
 import { Language } from '../logic/Enums'
 
 
@@ -17,13 +17,13 @@ class SettingsPopup extends Component {
         }
     }
     handleCheckbox = (index) => {
-        if (index == 0) {
+        if (index === 0) {
             this.props.toggleDarkmode();
         }
-        if (index == 1) {
+        if (index === 1) {
             this.props.toggleHardmode();
         }       
-        if (index == 2) {
+        if (index === 2) {
             this.props.clearCookies();
             this.setState({
                 clearCookies: true,
@@ -60,7 +60,7 @@ class SettingsPopup extends Component {
                     <div className="settings-description">Language</div>
                 </div>
                 <div className="settings-row">
-                    { this.props.darkmode == true && <div className="checkbox-background"></div> }
+                    { this.props.darkmode === true && <div className="checkbox-background"></div> }
                     <Checkbox
                         checked={this.props.darkmode}
                         onChange={() => this.handleCheckbox(0)}
@@ -73,7 +73,7 @@ class SettingsPopup extends Component {
                     <div className="settings-description">Dark mode</div>
                 </div>
                 <div className="settings-row">
-                    { this.props.hardmode == true && <div className="checkbox-background"></div> }
+                    { this.props.hardmode === true && <div className="checkbox-background"></div> }
                     <Checkbox
                         checked={this.props.hardmode}
                         onChange={() => this.handleCheckbox(1)}
@@ -86,7 +86,7 @@ class SettingsPopup extends Component {
                     <div className="settings-description">Hard mode</div>
                 </div>
                 <div className="settings-row">
-                    { this.state.clearCookies == true && <div className="checkbox-background"></div> }
+                    { this.state.clearCookies === true && <div className="checkbox-background"></div> }
                     <Checkbox
                         checked={this.state.clearCookies}
                         onChange={() => this.handleCheckbox(2)}

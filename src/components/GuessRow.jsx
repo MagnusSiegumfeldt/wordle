@@ -22,7 +22,7 @@ class GuessRow extends Component {
                 handleKeyDown={this.handleKeyDown} 
                 key={index} 
                 index={index}
-                active={this.props.active && Math.min(this.props.content.length, 4) == index}
+                active={this.props.active && Math.min(this.props.content.length, 4) === index}
                 content={this.props.content[index]}
                 charState={this.props.charState[index]}
                 handleClickDelete={this.props.handleClickDelete}
@@ -33,12 +33,9 @@ class GuessRow extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.complete != this.props.complete && this.props.complete) {
+        if (prevProps.complete !== this.props.complete && this.props.complete) {
             this.checkWord();
         }
-        
-    }
-    componentDidMount(){
         
     }
 }

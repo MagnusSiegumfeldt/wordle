@@ -34,14 +34,14 @@ class CookieHelper {
     }
     static getShowTutorial = () => {
         const tutorialPopupString = Cookies.get('tutorial');
-        return tutorialPopupString != "true";
+        return tutorialPopupString !== "true";
     }
     static setShowTutorial = () => {
         Cookies.set('tutorial', true);
     }
     static getHardmode = () => {
         const hardmodeString = Cookies.get('hardmode');
-        return hardmodeString == "true";
+        return hardmodeString === "true";
     }
     static setHardmode = (hardmode) => {
         Cookies.set('hardmode', hardmode);
@@ -49,7 +49,7 @@ class CookieHelper {
     
     static getDarkmode = () => {
         const darkmodeString = Cookies.get('darkmode');
-        return darkmodeString != "false";
+        return darkmodeString !== "false";
     }
     static setDarkmode = (darkmode) => {
         Cookies.set('darkmode', darkmode);
@@ -57,17 +57,17 @@ class CookieHelper {
 
     static getLanguage = () => {
         const languageString = Cookies.get('language');
-        if (languageString == "danish") {
+        if (languageString === "danish") {
             return Language.Danish;
-        } else if (languageString == "english") {
+        } else if (languageString === "english") {
             return Language.English;
         } 
         return Language.Danish;
     }
     static setLanguage = (language) => {
-        if (language == Language.English) {
+        if (language === Language.English) {
             Cookies.set('language', "english");
-        } else if (language == Language.Danish) {
+        } else if (language === Language.Danish) {
             Cookies.set('language', "danish");
         } 
         

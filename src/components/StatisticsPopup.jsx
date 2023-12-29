@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 
 class StatisticsPopup extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        const game = this.props.game;
         const { score, games, wins, currentStreak, bestStreak } = this.props.stats;
         const total = score.reduce((a, c) => a + c, 0);
         const widths = score.map(x => (x * 1.0 / total))
@@ -41,7 +35,7 @@ class StatisticsPopup extends Component {
                             widths.map((x, i) => (
                                 <div key={i} className="bar-container">
                                     <div className="bar-label-container"><p className="bar-label">{ i + 1 }</p></div>
-                                    <div style={{width: "calc(" + x * 81 + "% + 10px)" }} className={"bar" + (this.props.guess == i ? " bar-guess" : "")}>{ score[i] }</div>
+                                    <div style={{width: "calc(" + x * 81 + "% + 10px)" }} className={"bar" + (this.props.guess === i ? " bar-guess" : "")}>{ score[i] }</div>
                                 </div>
                             ))     
                         }
