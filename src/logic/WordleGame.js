@@ -176,7 +176,9 @@ class WordleGame {
                     }
                     this.charState[this.currentGuess][i] = CharState.SemiCorrect;
                 } else {
-                    this.letterState[guess[i]] = CharState.Wrong;
+                    if (this.letterState[guess[i]] !== CharState.Correct && this.letterState[guess[i]] !== CharState.SemiCorrect) {
+                        this.letterState[guess[i]] = CharState.Wrong;
+                    }
                     this.charState[this.currentGuess][i] = CharState.Wrong;
                 }
             } else {
