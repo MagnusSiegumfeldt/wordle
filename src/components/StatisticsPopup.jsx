@@ -14,7 +14,7 @@ class StatisticsPopup extends Component {
         const widths = score.map(x => (x * 1.0 / total))
         const winrate = games > 0 ? Math.round(wins * 1.0 / games * 100) : 0;
         return (
-            <div className="popup-container">
+            <div onClick={e => e.stopPropagation()} className="popup-container">
                 <div className="tutorial-header">Statistics</div>
                 <div className={"statistics-container"}>
                     <div className={"winrate-container"}>

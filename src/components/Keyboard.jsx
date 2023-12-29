@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import { CharState } from '../logic/WordleGame'
+import { CharState } from '../logic/Enums'
 
 const StateMap = {
     [CharState.Correct]: "keyboard-correct",

@@ -3,8 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
+    position: relative;
 }
 
 .header-container {
@@ -24,7 +24,15 @@
     justify-content: center;
     align-items: center;
 }
-.icon:hover {
+.non-clickable-icon {
+    margin: 0px 10px;
+    color: var(--header-font-color);
+    justify-self: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon-hoverable:hover {
     color: var(--header-font-hover-color);
 }
 
@@ -38,11 +46,17 @@
     pointer-events: none;
 }
 
+.hardmode-deactivated {
+    opacity: 0.3;
+}
 .logo h1 {
     color: var(--header-font-color);
     margin: 0px;
 }
-
+.language-icon {
+    font-size: 12px;
+    cursor:default;
+}
 .right-header {
     display: flex;
     justify-content: right;

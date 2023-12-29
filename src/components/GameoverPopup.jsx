@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GameState } from '../logic/WordleGame'
+import { GameState } from '../logic/Enums'
 
 class GameoverPopup extends Component {
 
@@ -13,7 +13,7 @@ class GameoverPopup extends Component {
         const total = score.reduce((a, c) => a + c, 0);
         const widths = score.map(x => (x * 1.0 / total))
         return (
-            <div className="popup-container">
+            <div onClick={e => e.stopPropagation()} className="popup-container">
                 {game.getGameState() == GameState.Won ? (
                     <p className="gameover-header">You guessed{"\n" + game.getWord() + "\n"}in { game.getGuessNum() + 1 } attempts</p>
                 ) : (

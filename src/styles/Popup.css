@@ -42,3 +42,32 @@
     font-size: 12px;
     margin: 10px 0px 20px 0px;
 }
+
+.notification-container {
+    position: absolute;
+    left: 50%;
+    top: 80px;
+    transform: translate(-50%, 0px);
+}
+.notification {
+    margin: 5px 0px;
+    padding: 8px 0px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 10px;
+    color: #fff;
+    background: #000000b4;
+    border-radius: 8px;
+    animation: notification-open 0.2s;
+}
+@keyframes notification-open {
+    from {
+        background: transparent;
+    } 
+    to {
+        background: #000000b4;
+    }
+}

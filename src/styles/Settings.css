@@ -11,10 +11,43 @@
 .checkbox-background {
     position: absolute;
     left: 12px;
-    background-color: var(--popup-font-color);
+    background-color: #fff;
     width: 16px;
     height: 16px;
 }
 .settings-description {
     font-size: 12px;
+}
+.language-select-container {
+    width: 26px !important;
+    min-width: 26px !important;
+}
+.language-select {
+    font: bold 12px Montserrat, sans-serif !important;
+    color:var(--popup-font-color) !important;
+    text-align: left !important;
+    padding: 0px 0px;
+    width: 100%;
+    
+}
+.language-select .MuiInput-input{
+    padding: 5px 0px 1px 0px !important;
+    text-align: center;
+}
+.MuiSelect-icon {
+    display: none !important;
+    color: var(--popup-font-color) !important;
+}
+.language-select-item {
+    font: bold 12px Montserrat, sans-serif !important;
+    color:var(--popup-font-color) !important;
+}
+.css-m5hdmq-MuiInputBase-root-MuiInput-root-MuiSelect-root:after {
+    border-bottom: 2px solid var(--theme-color) !important;
+}
+.MuiMenu-list {
+    background-color: var(--popup-background-color);
+}
+.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+    background-color: var(--popup-background-color) !important;
 }

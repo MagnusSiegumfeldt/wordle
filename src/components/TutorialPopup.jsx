@@ -9,8 +9,7 @@ class TutorialPopup extends Component {
 
     render() {
         return (
-            <div className="popup-container">
-                
+            <div onClick={e => e.stopPropagation()} className="popup-container">
                 <div className="tutorial-header">How to play WORDLE</div>
                 <div className="popup-description">Guess the word in 6 tries. Each guess must be a valid 5-letter word.</div>
                 <div className="tutorial-example-container">

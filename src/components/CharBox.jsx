@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CharState } from '../logic/WordleGame'
+import { CharState } from '../logic/Enums'
 
 
 const StateMap = {

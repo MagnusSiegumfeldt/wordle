@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import { HelpOutline, Leaderboard, Settings } from '@mui/icons-material';
+import { HelpOutline, Leaderboard, Settings, LocalFireDepartment } from '@mui/icons-material';
+import { Language } from '../logic/Enums'
+
 class Header extends Component {
 
     constructor(props) {
@@ -10,28 +12,39 @@ class Header extends Component {
     render() {
         
         return (
-            <header className='app-header'>
+            <div className='app-header'>
                 <div className='header-container'>
                     <div className='left-header'></div>
                     <div className='logo'>
                         <h1>Wordle</h1>
                     </div>
                     <div className='right-header'>
-                        <div className='icon' onClick={() => this.props.togglePopup("statistics")}>
-                           
-                            <Leaderboard fontSize="medium"/>
-
+                        <div className='non-clickable-icon'>
+                            <div className="language-icon">
+                                {
+                                    this.props.language == Language.Danish ? "DK" : 
+                                    this.props.language == Language.English ? "EN" : 
+                                    "Err."
+                                }
+                            </div>
                         </div>
-                        <div className='icon' onClick={() => this.props.togglePopup("tutorial")}>
+                        <div className='icon icon-hoverable' onClick={() => this.props.toggleHardmode()}>
+                           <LocalFireDepartment className={this.props.hardmode ? "hardmode-activated" : "hardmode-deactivated"} style={{marginTop: "3px" }} fontSize="medium"/>
+                        </div>
+                        <div className='icon icon-hoverable' onClick={(e) => this.props.togglePopup(e, "statistics")}>
+                            <Leaderboard fontSize="medium"/>
+                        </div>
+                        <div className='icon icon-hoverable' onClick={(e) => this.props.togglePopup(e, "tutorial")}>
                             <HelpOutline fontSize="medium"/>
                         </div>
-                        <div className='icon' onClick={() => this.props.togglePopup("settings")}>
+                        <div className='icon icon-hoverable' onClick={(e) => this.props.togglePopup(e, "settings")}>
                             <Settings fontSize="medium"/>
                         </div>
                     </div>
                     
                 </div>
-            </header>
+                
+            </div>
 
 
 

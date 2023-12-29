@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Cookies from 'js-cookie';
 
 import Game from './components/Game'
 import Header from './components/Header'
@@ -7,10 +6,13 @@ import SettingsPopup from './components/SettingsPopup'
 import TutorialPopup from './components/TutorialPopup'
 import GameoverPopup from './components/GameoverPopup'
 import StatisticsPopup from './components/StatisticsPopup'
+import NotificationContainer from './components/NotificationContainer'
 
 import { CookieHelper } from './logic/CookieHelper'
-import { WordleGame, GameState, CharState } from './logic/WordleGame'
-import danish from './assets/danish.json'
+import { WordleGame } from './logic/WordleGame'
+import { ErrorType, GameState, Notification } from './logic/Enums'
+
+
 
 import "@fontsource/montserrat/500.css";
 import "@fontsource/montserrat/700.css";
@@ -23,38 +25,56 @@ import './styles/Settings.css';
 import './styles/Popup.css';
 import './styles/Header.css';
 
+
+
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ";
+
 class App extends Component {
 	constructor(props) {
 		super(props);
-		
-		const game = new WordleGame(danish);
-		
-		this.gameRef = React.createRef();
 
-		const colorThemeCookie = Cookies.get('colorTheme');
-		let colorTheme = colorThemeCookie;
-		if (!colorThemeCookie) {
-			colorTheme = "dark";
-		}
+		this.gameRef = React.createRef();
+		
+		const darkmode 		= CookieHelper.getDarkmode();
+		const hardmode 		= CookieHelper.getHardmode();
+		const tutorialPopup = CookieHelper.getShowTutorial();
+        const stats 		= CookieHelper.getStats();
+		const language 		= CookieHelper.getLanguage();
+		
 		const body = document.querySelector('body');
-		body.classList.add(colorTheme);
+		body.classList.add(darkmode ? "dark" : "light");
 		
-		const tutorialPopupString = Cookies.get('tutorialPopup');
-		const tutorialPopup = CookieHelper.parseTutorialString(tutorialPopupString);
 		
-		const statString = Cookies.get('stats');
-        const stats = CookieHelper.parseStats(statString);
-
-		this.gameRef = React.createRef();
+		const game = new WordleGame(language, hardmode);
+		
 		this.state = {
+			currentGuess: [],
 			settingsPopup: false,
 			tutorialPopup,
 			statisticsPopup: false,
 			gameoverPopup: false,
-			colorTheme,
-			game: game,
+			darkmode,
+			hardmode,
+			game,
 			stats,
+			shake: -1,
+			notifications: [],
+			language
 		};
+	}
+	createNotification = (notification) => {
+		let { notifications } = this.state;
+		notifications.push(notification);
+		this.setState({
+			notifications,
+		});
+		
+		setTimeout(() => {
+			notifications.shift();
+			this.setState({
+				notifications,
+			});
+		}, 1200);
 	}
 	handleClosePopup = () => {
 		this.setState({
@@ -64,33 +84,52 @@ class App extends Component {
 		});
 		this.gameRef.current.focus();
 	}
-
-	changeColorTheme = () => {
+	componentDidMount() {
+		this.gameRef.current.focus();
+	}
+	toggleDarkmode = () => {
+		const { darkmode } = this.state;
 		const body = document.querySelector('body');
-		if (this.state.colorTheme == "dark") {
+		if (this.state.darkmode) {
 			body.classList.add("light");
 			body.classList.remove("dark");
 		} else {
 			body.classList.add("dark");
 			body.classList.remove("light");
 		}
-		const newTheme = this.state.colorTheme == "dark" ? "light" : "dark";
 		this.setState({
-			colorTheme: newTheme,
+			darkmode: !darkmode,
 		});
-		Cookies.set('colorTheme', newTheme);
+		CookieHelper.setDarkmode(!darkmode);
+		
 	}
-
+	toggleHardmode = () => {
+		
+		const error = this.state.game.toggleHardmode();
+		if (error != ErrorType.None) {
+			this.createNotification(error);
+			return;
+		} 
+		const hardmode  = this.state.game.getHardmode();
+		this.setState({
+			hardmode: hardmode,
+		});
+		CookieHelper.setHardmode(hardmode);
+		const notification = (hardmode ? Notification.HardmodeEnabled : Notification.HardmodeDisabled);
+		this.createNotification(notification);
+	}
 	handleStatisticsClick = () => {
 		this.setState({
 			statisticsPopup: !this.state.statisticsPopup
 		});
 	}
+	
 	makeGuess = (guess) => {
-		let { game, stats } = this.state;
-		const validGuess = game.makeGuess(guess);
-		if (!validGuess) {
-			return false;
+		let { game, stats, notifications } = this.state;
+		const error = game.makeGuess(guess);
+		if (error != ErrorType.None) {
+			this.createNotification(error);
+			return error;
 		}
 		if (game.getGameState() == GameState.Won) {
 			stats.score[game.getGuessNum()] += 1;
@@ -104,7 +143,8 @@ class App extends Component {
 				this.setState({
 					gameoverPopup: true,
 				});
-			}, 600)
+			}, 600);
+			CookieHelper.setStats(stats);
 			
 		} else if (game.getGameState() == GameState.Lost) {
 			stats.games += 1;
@@ -113,24 +153,28 @@ class App extends Component {
 				this.setState({
 					gameoverPopup: true,
 				});
-			}, 600)
+			}, 600);
+			CookieHelper.setStats(stats);
 		} 
 		this.setState({
 			game,
 			stats,
 		});
-		return true;
+		
+		return error;
 	}
 
 	handleDontShow = () => {
 		const tutorialPopup = false;
-		Cookies.set('tutorialPopup', 1);
+		CookieHelper.setShowTutorial(true);
+		
 		this.setState({
 			tutorialPopup,
 		});
 		this.gameRef.current.focus();
 	}
-	togglePopup = (popup) => {
+	togglePopup = (event, popup) => {
+		event.stopPropagation()
 		this.setState({
 			tutorialPopup:   (popup == "tutorial"     && !this.state.tutorialPopup  ),
 			settingsPopup:   (popup == "settings"     && !this.state.settingsPopup  ),
@@ -144,12 +188,14 @@ class App extends Component {
 		});
 	}
 	handleOutsideClick = () => {
-		if (this.state.settingsPopup || this.state.tutorialPopup) {
+		if (this.state.settingsPopup || this.state.tutorialPopup || this.state.statisticsPopup) {
 			this.setState({
 				settingsPopup: false,
 				tutorialPopup: false,
+				statisticsPopup: false,
 			});
 		}
+		
 	}
 	handleTutorialClick = () => {
 		this.setState({
@@ -157,7 +203,7 @@ class App extends Component {
 		});
 	}
 	handleRestart = () => {
-        const game = new WordleGame(danish);
+        const game = new WordleGame(this.state.language, this.state.hardmode);
 		this.setState({
 			game, 
 			currentGuess: [],
@@ -166,16 +212,112 @@ class App extends Component {
 		
 		this.gameRef.current.focus();
     }
+	shakeRow = (rowIndex) => {
+        this.setState({
+            shake: rowIndex
+        });
+        setTimeout(() => {
+            this.setState({
+                shake: -1
+            });
+        }, 400);
+    }
+    
+	processInput = (input) => {
+        input = input.toUpperCase();
+        let { currentGuess } = this.state;
+        let { game, stats } = this.state;
+        if (input == "BACKSPACE") {
+            if (currentGuess.length > 0) {
+                currentGuess.pop();
+            }
+        } else if (input == "ENTER") {
+            if (currentGuess.length == 5) {
+				const error = this.makeGuess(currentGuess.join(""));
+                if (error == ErrorType.None) {
+                    currentGuess = [];
+                } else {
+                    this.shakeRow(game.getGuessNum());
+                }
+            } else {
+                if (game.isGameover()) {
+                    this.handleRestart();
+                    return;
+                } else {
+                    
+                    this.shakeRow(game.getGuessNum());
+                    this.createNotification(ErrorType.Length);
+                }
+            }
+        } else if (input == " ") {
+            if (game.isGameover()) {
+                this.handleRestart();
+                return;
+            } 
+        } else if (currentGuess.length < 5 && alphabet.includes(input)) {
+            currentGuess.push(input);
+        }
+        this.setState({
+            currentGuess,
+            game,
+            stats,
+        });
+        
+    }
+
+	handleClickDelete = (index) => {
+        let { currentGuess } = this.state;
+        while (index < currentGuess.length) {
+            currentGuess.pop();
+        }
+        this.setState({
+            currentGuess
+        });
+    }
+	clearCookies = () => {
+		CookieHelper.clear();
+		this.createNotification(Notification.CookiesReset)
+	}
+
+	setLanguage = (language) => {
+		const error = this.state.game.setLanguage(language)
+		if (error != ErrorType.None) {
+			this.createNotification(error);
+			return;
+		} 
+		this.setState({
+			language,
+		});
+		CookieHelper.setLanguage(language);
+	}
+
 	render() {
 		return (
-			<div className="app">
-				<Header togglePopup={this.togglePopup}/>
-				<Game gameRef={this.gameRef} game={this.state.game} handleOutsideClick={this.handleOutsideClick} makeGuess={this.makeGuess} handleRestart={this.handleRestart}/>
+			<div tabIndex={-1} ref={this.gameRef} onClick={this.handleOutsideClick} className="app" onKeyDown={event => this.processInput(event.key)}>
+				<Header togglePopup={this.togglePopup} toggleHardmode={this.toggleHardmode} hardmode={this.state.game.getHardmode()} language={this.state.language}/>
+				<Game 
+					shake={this.state.shake}
+					handleClickDelete={this.handleClickDelete} 
+					game={this.state.game} 
+					word={this.state.currentGuess.join("")} 
+					processInput={this.processInput}
+				/>
 				{ this.state.gameoverPopup   && <GameoverPopup stats={this.state.stats} game={this.state.game} handleRestart={this.handleRestart}/> }
-				{ this.state.settingsPopup   && <SettingsPopup handleClosePopup={this.handleClosePopup} changeColorTheme={this.changeColorTheme} colorTheme={this.state.colorTheme}/> }
+				{ this.state.settingsPopup   && 
+					<SettingsPopup 
+						handleClosePopup={this.handleClosePopup} 
+						hardmode={this.state.game.getHardmode()} 
+						toggleHardmode={this.toggleHardmode} 
+						darkmode={this.state.darkmode}
+						toggleDarkmode={this.toggleDarkmode} 
+						clearCookies={this.clearCookies}
+						language={this.state.language}
+						setLanguage={this.setLanguage}
+					/> 
+				}
 				{ this.state.tutorialPopup   && <TutorialPopup handleDontShow={this.handleDontShow} handleClosePopup={this.handleClosePopup}/> }
 				{ this.state.statisticsPopup && <StatisticsPopup stats={this.state.stats} handleClosePopup={this.handleClosePopup}/> }
-				
+				{ this.state.notifications.length > 0 && <NotificationContainer notifications={this.state.notifications} /> }
 			</div>
 		);
 	}

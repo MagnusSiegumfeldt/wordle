@@ -15,12 +15,11 @@
 
 .keyboard-button-container {
     position: relative;
-    width: fill;
+    width: stretch;
     height: 45px;
     margin: 3px;
     
     text-align: center;
-
 }
 
 .keyboard-button {
@@ -34,12 +33,16 @@
     color: var(--keyboard-font-color);
     font-size: 16px;
     font-weight: bold;
+    background-color: var(--keyboard-button-color);
     
     border-radius: 3px;
     border: none;
 
     cursor: pointer;
+    
 }
+
+
 .keyboard-button-control {
     min-width: 18%;
     color:var(--keyboard-font-color);
@@ -65,7 +68,9 @@
 .keyboard-correct:hover {
     color: var(--keyboard-flipped-font-color);
     background-color: var(--correct-charbox-hover-color);
+    
 }
+
 .keyboard-semicorrect {
     color: var(--keyboard-flipped-font-color);
     background-color: var(--semicorrect-charbox-color);
@@ -82,6 +87,9 @@
     color: var(--keyboard-flipped-font-color);
     background-color: var(--wrong-charbox-hover-color);
 }
+
+
+
 
 @media only screen and (max-width: 767px) {
     .keyboard-button-container {
