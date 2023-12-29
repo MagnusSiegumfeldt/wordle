@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 
 class TutorialPopup extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div onClick={e => e.stopPropagation()} className="popup-container">
