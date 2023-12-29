@@ -10,7 +10,6 @@ class WordleGame {
         this.answerlist = this.getAnswerList(language);
         this.wordlist = this.getWordList(language);
         this.word = this.getRandomWord(this.answerlist);
-        this.word = "REGAL"
         this.guesses = [];
         this.currentGuess = 0;
         this.maxGuesses = 6;
