@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { GameState } from '../logic/Enums'
 
 class GiveupPopup extends Component {
     render() {
