@@ -5,15 +5,13 @@ import Keyboard from './Keyboard'
 class Game extends Component {
     render() {
         const { game, word } = this.props;
-        
         const divs = Array.from({ length: 6 }, (_, index) => (
             <GuessRow 
                 key={index} 
                 content={
-                    index < game.getGuessNum() ? game.getGuess(index) :
-                    index === game.getGuessNum() && game.isGameover() ? game.getGuess(index) :
-                    index === game.getGuessNum() ? word :
-                    ""}
+                    index === game.getGuessNum() && !game.isGameover() ? word :
+                    game.getGuess(index) ? game.getGuess(index) : ""
+                }
                 active={index === game.getGuessNum()}
                 shake={this.props.shake === index}
                 charState={game.getCharState()[index]} 

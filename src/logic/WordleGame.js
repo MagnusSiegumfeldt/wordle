@@ -193,24 +193,26 @@ class WordleGame {
             return error;
         } 
         this.evaluateGuess(guess);
+        this.guesses.push(guess);
         if (guess === this.word) {
-            this.guesses.push(guess);
             this.gamestate = GameState.Won;
-            return ErrorType.None;
         } else {
-            this.guesses.push(guess);
             this.currentGuess += 1;
             if (this.currentGuess === 6) {
                 this.gamestate = GameState.Lost;
             }
-            return ErrorType.None;
         }
+        console.log(this.guesses)
+        return ErrorType.None;
     }
     getGuess = (index) => {
         return this.guesses[index];
     }
     getWord = () => {
         return this.word;
+    }
+    giveup = () => {
+        this.gamestate = GameState.Lost; 
     }
 
 }

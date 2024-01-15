@@ -211,15 +211,24 @@ class App extends Component {
 			tutorialPopup: !this.state.tutorialPopup,
 		});
 	}
+	handleGiveup = () => {
+		let { stats, game } = this.state;
+		game.giveup();
+		stats.games += 1;
+		stats.currentStreak = 0;
+		this.setState({
+			giveupPopup: false,
+			gameoverPopup: true,
+		});
+	}
 	handleRestart = () => {
         const game = new WordleGame(this.state.language, this.state.hardmode);
+		
 		this.setState({
 			game, 
 			currentGuess: [],
 			gameoverPopup: false,
-			giveupPopup: false,
 		});
-		
 		this.gameRef.current.focus();
     }
 	shakeRow = (rowIndex) => {
@@ -235,8 +244,7 @@ class App extends Component {
     
 	processInput = (input) => {
         input = input.toUpperCase();
-        let { currentGuess } = this.state;
-        let { game, stats } = this.state;
+        let { currentGuess, game } = this.state;
         if (input === "BACKSPACE") {
             if (currentGuess.length > 0) {
                 currentGuess.pop();
@@ -265,12 +273,14 @@ class App extends Component {
                 return;
             } 
         } else if (currentGuess.length < 5 && alphabet.includes(input)) {
+			if (game.isGameover()) {
+				return;
+			}
             currentGuess.push(input);
         }
         this.setState({
             currentGuess,
             game,
-            stats,
         });
         
     }
@@ -328,7 +338,7 @@ class App extends Component {
 				{ this.state.tutorialPopup   && <TutorialPopup handleDontShow={this.handleDontShow} handleClosePopup={this.handleClosePopup}/> }
 				{ this.state.statisticsPopup && <StatisticsPopup stats={this.state.stats} handleClosePopup={this.handleClosePopup}/> }
 				{ this.state.notifications.length > 0 && <NotificationContainer notifications={this.state.notifications} /> }
-				{ this.state.giveupPopup > 0 && <GiveupPopup handleClosePopup={this.handleClosePopup} handleRestart={this.handleRestart}/> }
+				{ this.state.giveupPopup > 0 && <GiveupPopup handleClosePopup={this.handleClosePopup} handleGiveup={this.handleGiveup}/> }
 			</div>
 		);
 	}

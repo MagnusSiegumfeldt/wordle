@@ -12,7 +12,7 @@ class GameoverPopup extends Component {
                 {game.getGameState() === GameState.Won ? (
                     <p className="gameover-header">You guessed{"\n" + game.getWord() + "\n"}in { game.getGuessNum() + 1 } attempts</p>
                 ) : (
-                    <p className="gameover-header">You did not guess{"\n" + game.getWord() + "\n"}in { game.getGuessNum() } attempts</p>
+                    <p className="gameover-header">You did not guess{"\n" + game.getWord()}</p>
                 )}
                 <div className={"statistics-container"}>
                 <div className={"winrate-container"}>
@@ -45,7 +45,7 @@ class GameoverPopup extends Component {
                     }
                 </div>
             </div>
-                <button className="gameover-restart-button" onClick={this.props.handleRestart}>Play again</button>
+                <button className="gameover-restart-button" onClick={() => this.props.handleRestart()}>Play again</button>
             </div>
             
         )
