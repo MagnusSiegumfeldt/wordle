@@ -6,6 +6,7 @@ import SettingsPopup from './components/SettingsPopup'
 import TutorialPopup from './components/TutorialPopup'
 import GameoverPopup from './components/GameoverPopup'
 import StatisticsPopup from './components/StatisticsPopup'
+import GiveupPopup from './components/GiveupPopup'
 import NotificationContainer from './components/NotificationContainer'
 
 import { CookieHelper } from './logic/CookieHelper'
@@ -53,6 +54,7 @@ class App extends Component {
 			tutorialPopup,
 			statisticsPopup: false,
 			gameoverPopup: false,
+			giveupPopup: false,
 			darkmode,
 			hardmode,
 			game,
@@ -81,6 +83,7 @@ class App extends Component {
 			settingsPopup: false,
 			tutorialPopup: false,
 			statisticsPopup: false,
+			giveupPopup: false,
 		});
 		this.gameRef.current.focus();
 	}
@@ -121,6 +124,11 @@ class App extends Component {
 	handleStatisticsClick = () => {
 		this.setState({
 			statisticsPopup: !this.state.statisticsPopup
+		});
+	}
+	showGiveupPopup = () => {
+		this.setState({
+			giveupPopup: true,
 		});
 	}
 	
@@ -179,6 +187,7 @@ class App extends Component {
 			tutorialPopup:   (popup === "tutorial"     && !this.state.tutorialPopup  ),
 			settingsPopup:   (popup === "settings"     && !this.state.settingsPopup  ),
 			statisticsPopup: (popup === "statistics"   && !this.state.statisticsPopup),
+			giveupPopup:     (popup === "giveup"       && !this.state.giveupPopup),
 		});
 		this.gameRef.current.focus();
 	}
@@ -207,7 +216,8 @@ class App extends Component {
 		this.setState({
 			game, 
 			currentGuess: [],
-			gameoverPopup: false
+			gameoverPopup: false,
+			giveupPopup: false,
 		});
 		
 		this.gameRef.current.focus();
@@ -318,6 +328,7 @@ class App extends Component {
 				{ this.state.tutorialPopup   && <TutorialPopup handleDontShow={this.handleDontShow} handleClosePopup={this.handleClosePopup}/> }
 				{ this.state.statisticsPopup && <StatisticsPopup stats={this.state.stats} handleClosePopup={this.handleClosePopup}/> }
 				{ this.state.notifications.length > 0 && <NotificationContainer notifications={this.state.notifications} /> }
+				{ this.state.giveupPopup > 0 && <GiveupPopup handleClosePopup={this.handleClosePopup} handleRestart={this.handleRestart}/> }
 			</div>
 		);
 	}

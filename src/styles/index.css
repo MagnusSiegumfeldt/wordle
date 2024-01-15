@@ -19,6 +19,8 @@ body.dark {
 
   --theme-color: #61ad62; 
   --theme-hover-color: #539c55;
+  --red-color: #fa7878;
+  --red-hover-color: #eb6f6f;
   --grey-color: #414141;
 
   --correct-charbox-color: var(--theme-color);
@@ -57,6 +59,8 @@ body.light {
 
   --theme-color: #61ad62; 
   --theme-hover-color: #539c55;
+  --red-color: #fa7878;
+  --red-hover-color: #eb6f6f;
   --grey-color: #414141;
 
   --correct-charbox-color: var(--theme-color);

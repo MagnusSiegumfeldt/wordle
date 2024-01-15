@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { HelpOutline, Leaderboard, Settings, LocalFireDepartment } from '@mui/icons-material';
+import { HelpOutline, Leaderboard, Settings, LocalFireDepartment, EmojiFlags } from '@mui/icons-material';
 import { Language } from '../logic/Enums'
 
 class Header extends Component {
@@ -8,7 +8,9 @@ class Header extends Component {
         return (
             <div className='app-header'>
                 <div className='header-container'>
-                    <div className='left-header'></div>
+                    <div className='left-header'>
+                        
+                    </div>
                     <div className='logo'>
                         <h1>Wordle</h1>
                     </div>
@@ -30,6 +32,9 @@ class Header extends Component {
                         </div>
                         <div className='icon icon-hoverable' onClick={(e) => this.props.togglePopup(e, "tutorial")}>
                             <HelpOutline fontSize="medium"/>
+                        </div>
+                        <div className='icon icon-hoverable' onClick={(e) => this.props.togglePopup(e, "giveup")}>
+                            <EmojiFlags fontSize="medium"/>
                         </div>
                         <div className='icon icon-hoverable' onClick={(e) => this.props.togglePopup(e, "settings")}>
                             <Settings fontSize="medium"/>
